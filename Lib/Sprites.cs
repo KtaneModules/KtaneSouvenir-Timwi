@@ -12,6 +12,15 @@ namespace Souvenir
         private static readonly Dictionary<string, Texture2D> _gridSpriteCache = new();
         private static readonly Dictionary<AudioClip, Texture2D> _audioSpriteCache = new();
 
+        public static Sprite GetCircleAnswer(SouvenirModule souvenirModule)
+        {
+            Texture2D oldCircleTexture = souvenirModule.AudioSprites[1].texture;
+            Texture2D temp =  new Texture2D(400, 320, TextureFormat.ARGB32, false);
+            temp.SetPixels(oldCircleTexture.GetPixels());
+
+            return Sprite.Create(temp, Rect.MinMaxRect(0f, 0f, 400f, 320f), new Vector2(.5f, .5f), 1280f, 1u, SpriteMeshType.Tight);
+        }
+
         public static Sprite GenerateGridSprite(Coord coord, float size = 1f)
         {
             var tw = 4 * coord.Width + 1;

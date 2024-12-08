@@ -288,6 +288,33 @@ namespace Souvenir
             }
         }
 
+        public class CircleGenerator : SpriteAnswerGeneratorAttribute
+        {
+
+            //# of row / cols
+            //binary or arr of dots that are lit (drawm)
+            private int width;
+            private int height;
+            private int litDots;
+            private int Count => width * height;
+
+
+            public CircleGenerator(int litDots) : this(2, 3, litDots) { }
+
+            public CircleGenerator(int width, int height, int litDots)
+            {
+                this.width = width;
+                this.height = height;
+                this.litDots = litDots;
+            }
+
+            public override IEnumerable<Sprite> GetAnswers(SouvenirModule module)
+            {
+                for (int ix = 0; ix < Count; ++ix)
+                    yield return Souvenir.Sprites.GetCircleAnswer(module);
+            }
+        }
+
         /// <summary>
         /// An answer generator that generates answers based on ordinal.
         /// <example>
