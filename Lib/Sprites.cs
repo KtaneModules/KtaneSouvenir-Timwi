@@ -29,17 +29,26 @@ namespace Souvenir
         {
             //Currently an exception is being thrown somewhere. I assume when 'binary' called, but I have not verified
 
+            var gap = 10; // how many pixels will between each circle vertically and horizontally
+            var textureWidth =  width * radius * 2 + ((width - 1) * gap);
+            var textureHeight = height * radius * 2 + ((height - 1) * gap);
+            var pixelCount = textureWidth * textureHeight;
+            var key = $"{width}:{height}:{litdots}:{outline}";
+
             //the binary reads from left to right of each circle
             //Ex: If the width and height are both 2:
             //1 will be the top left circle
             //10 will be the top right circle
             //101 will be the top right and top left circles
             var binary = Convert.ToString(litdots, 2);
-            var gap = 10; // how many pixels will between each circle vertically and horizontally
-            var textureWidth =  width * radius * 2 + ((width - 1) * gap);
-            var textureHeight = height * radius * 2 + ((height - 1) * gap);
-            var pixelCount = textureWidth * textureHeight;
-            var key = $"{width}:{height}:{litdots}:{outline}";
+
+            //the commented out code causes an infite loop. Unsure why
+
+            //make sure the length of the strings is equal to the number of possible circles
+            //while (binary.Length < pixelCount)
+            //{
+            //    binary = "0" + binary;
+            //}
 
             //if the sprite is not cached, create it
             if (!_circleSpriteCache.TryGetValue(key, out var tx))
@@ -76,7 +85,7 @@ namespace Souvenir
                     foreach (Vector2 centerPos in circleCenters)
                     {
                         //if this circle shouldn't be drawn, move on
-                        if (binary[pixelIndex] == '0' && !outline)
+                        if (binary[binary.Length - 1 - pixelIndex] == '0' && !outline)
                             continue;
 
                         Vector2 pixelPosition = new Vector2(pixelIndex % width, pixelIndex / width);
@@ -88,8 +97,9 @@ namespace Souvenir
                         if ((binary[pixelIndex] == '0' && distanceSquared == radiusSquared) || 
                             (binary[pixelIndex] == '1' && distanceSquared <= radiusSquared))
                         {
-                            //set the pixel to white
+                            //set the pixel to white and move on to the next one
                             pixels[pixelIndex] = new Color32(0xFF, 0xF8, 0xDD, 0xFF);
+                            break;
                         }
                     }
                 }
