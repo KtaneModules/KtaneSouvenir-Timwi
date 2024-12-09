@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,7 +15,7 @@ namespace Souvenir
     /// </para>
     /// <para>
     ///     To use an answer generator, add an attribute which is a subclass of <see cref="AnswerGeneratorAttribute"/> to the <see cref="Question"/> enum value.
-    ///     <see cref="SouvenirQuestionAttribute.AllAnswers"/> should usually be null when using an answer generator.
+    ///     <see cref="SouvenirQuestionAttribute.AllAnswers"/> should be null when using an answer generator.
     ///     When the question is generated, any answer generator will be used to effectively append as many randomly selected answers as needed to <see cref="SouvenirQuestionAttribute.AllAnswers"/>.
     ///     Preferred wrong answers may still be specified in addition to an answer generator, or instead of one as was done previously.
     /// </para>
@@ -33,13 +34,12 @@ namespace Souvenir
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public abstract class AnswerGeneratorAttribute : Attribute
     {
-        public abstract IEnumerable<string> GetAnswers(SouvenirModule module);
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
-    public abstract class SpriteAnswerGeneratorAttribute : Attribute
+    public abstract class AnswerGeneratorAttribute<T> : AnswerGeneratorAttribute
     {
-        public abstract IEnumerable<Sprite> GetAnswers(SouvenirModule module);
+        public abstract IEnumerable<T> GetAnswers(SouvenirModule module);
     }
 
     public static class AnswerGenerator
@@ -62,7 +62,7 @@ namespace Souvenir
         ///     [AnswerGenerator.Integers(0, 999, "000")]  // Generates integers between 0 and 999 and adds leading zeros.
         /// </code>
         /// </example>
-        public class Integers : AnswerGeneratorAttribute
+        public class Integers : AnswerGeneratorAttribute<string>
         {
             public int Min { get; private set; }
             public int MaxSteps { get; private set; }
@@ -103,9 +103,11 @@ namespace Souvenir
                 // With no more than 6 possible values, the above case may go into an infinite loop trying to generate 5 distinct values.
                 // In this case, we will return all possible values in a random order and then halt.
                 var values = new int[MaxSteps];
-                for (int i = MaxSteps - 1; i >= 0; --i) values[i] = i * Step + Min;
+                for (int i = MaxSteps - 1; i >= 0; i--)
+                    values[i] = i * Step + Min;
                 values.Shuffle();
-                foreach (var i in values) yield return i.ToString(Format);
+                foreach (var i in values)
+                    yield return i.ToString(Format);
             }
         }
 
@@ -125,7 +127,7 @@ namespace Souvenir
         ///     [AnswerGenerator.Strings("2*0-9A-Z")]  // Generates answers consisting of two alphanumeric characters.
         /// </code>
         /// </example>
-        public class Strings : AnswerGeneratorAttribute
+        public class Strings : AnswerGeneratorAttribute<string>
         {
             public struct CharacterList
             {
@@ -222,7 +224,7 @@ namespace Souvenir
             public Strings(params string[] characterLists)
             {
                 this.characterLists = new CharacterList[characterLists.Length];
-                for (int i = characterLists.Length - 1; i >= 0; --i)
+                for (int i = characterLists.Length - 1; i >= 0; i--)
                     this.characterLists[i] = CharacterList.Parse(characterLists[i]);
             }
             /// <param name="count">The number of characters to choose.</param>
@@ -256,9 +258,8 @@ namespace Souvenir
                 while (true)
                 {
                     foreach (var characterList in characterLists)
-                    {
-                        for (int i = characterList.Count - 1; i >= 0; --i) builder.Append(characterList.Pick());
-                    }
+                        for (int i = characterList.Count - 1; i >= 0; i--)
+                            builder.Append(characterList.Pick());
                     yield return builder.ToString();
                     builder.Length = 0;
                 }
@@ -266,7 +267,7 @@ namespace Souvenir
         }
 
         /// <summary>An answer generator that generates answers consisting of randomly selected grid cells.</summary>
-        public class Grid : SpriteAnswerGeneratorAttribute
+        public class Grid : AnswerGeneratorAttribute<Sprite>
         {
             private readonly int _width;
             private readonly int _height;
@@ -283,37 +284,36 @@ namespace Souvenir
 
             public override IEnumerable<Sprite> GetAnswers(SouvenirModule module)
             {
-                for (int ix = 0; ix < Count; ++ix)
-                    yield return Souvenir.Sprites.GenerateGridSprite(_width, _height, ix, _size);
+                for (int ix = 0; ix < Count; ix++)
+                    yield return Sprites.GenerateGridSprite(_width, _height, ix, _size);
             }
         }
 
-        public class CircleGenerator : SpriteAnswerGeneratorAttribute
+        public class Circles : AnswerGeneratorAttribute<Sprite>
         {
+            private readonly int _width; // # of rows
+            private readonly int _height; // # of columns
+            private readonly int _radius; // radius of each circle
 
-            //# of row / cols
-            //binary or arr of dots that are lit (drawm)
-            private int width; // # of rows that will appear
-            private int height; //# of col that will appear
-            private int radius; //the radius of each circle
-            private int litDots; //which dots will be lit
-
-            private int Count => width * height;
-
-
-
-            public CircleGenerator(int width, int height, int litDots, int radius)
+            public Circles(int width, int height, int radius)
             {
-                this.width = width;
-                this.height = height;
-                this.litDots = litDots;
-                this.radius = radius;
+                _width = width;
+                _height = height;
+                _radius = radius;
             }
 
             public override IEnumerable<Sprite> GetAnswers(SouvenirModule module)
             {
-                for (int ix = 0; ix < Count; ++ix)
-                    yield return Souvenir.Sprites.GetCircleAnswer(module, width, height, litDots, radius);
+                var maxDots = _width * _height;
+                if (maxDots >= 10)
+                    while (true)
+                        yield return Sprites.GetCircleAnswer(_width, _height, Random.Range(0, 1 << maxDots), _radius);
+
+                // With no more than 6 possible values, the above case may go into an infinite loop trying to generate 5 distinct values.
+                // In this case, we will return all possible values in a random order and then halt.
+                var dotPatterns = Enumerable.Range(0, 1 << maxDots).ToArray().Shuffle();
+                foreach (var dotPattern in dotPatterns)
+                    yield return Sprites.GetCircleAnswer(_width, _height, dotPattern, _radius);
             }
         }
 
@@ -327,7 +327,7 @@ namespace Souvenir
         /// </code>
         /// </example>
         /// </summary>
-        public class Ordinal : AnswerGeneratorAttribute
+        public class Ordinal : AnswerGeneratorAttribute<string>
         {
             public int Min { get; private set; }
             public int MaxSteps { get; private set; }
@@ -360,9 +360,11 @@ namespace Souvenir
                 // With no more than 6 possible values, the above case may go into an infinite loop trying to generate 5 distinct values.
                 // In this case, we will return all possible values in a random order and then halt.
                 var values = new int[MaxSteps];
-                for (int i = MaxSteps - 1; i >= 0; --i) values[i] = i * Step + Min;
+                for (int i = MaxSteps - 1; i >= 0; i--)
+                    values[i] = i * Step + Min;
                 values.Shuffle();
-                foreach (var i in values) yield return module.Ordinal(i);
+                foreach (var i in values)
+                    yield return module.Ordinal(i);
             }
         }
     }
