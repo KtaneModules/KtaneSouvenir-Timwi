@@ -749,6 +749,19 @@ public partial class SouvenirModule
     {
         var comp = GetComponent(module, "BrailleModule");
         yield return WaitForSolve;
+        var highlights = GetArrayField<MeshFilter>(comp, "BrailleLetterHighlights", isPublic: true).Get(expectedLength: 4);
+
+        Debug.Log($"Shared mesh is null: {highlights[0].sharedMesh == null}");
+        foreach (MeshFilter mf in highlights)
+        {
+            
+            Debug.Log("Mesh filter name " + mf.name);
+            Debug.Log("Mesh name " + mf.mesh.name);
+            Debug.Log($"Shared mesh name: ${mf.sharedMesh.name}");
+            Debug.Log("");
+        }
+
+        
         addQuestion(module, Question.BrailleWord, correctAnswers: new[] { GetField<string>(comp, "_word").Get() });
     }
 
