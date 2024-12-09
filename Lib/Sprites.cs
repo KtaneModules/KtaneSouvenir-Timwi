@@ -3,22 +3,102 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Souvenir
 {
     public static class Sprites
     {
+        private static readonly Dictionary<string, Texture2D> _circleSpriteCache = new();
         private static readonly Dictionary<string, Texture2D> _gridSpriteCache = new();
         private static readonly Dictionary<AudioClip, Texture2D> _audioSpriteCache = new();
 
-        public static Sprite GetCircleAnswer(SouvenirModule souvenirModule)
-        {
-            Texture2D oldCircleTexture = souvenirModule.AudioSprites[1].texture;
-            Texture2D temp =  new Texture2D(400, 320, TextureFormat.ARGB32, false);
-            temp.SetPixels(oldCircleTexture.GetPixels());
 
-            return Sprite.Create(temp, Rect.MinMaxRect(0f, 0f, 400f, 320f), new Vector2(.5f, .5f), 1280f, 1u, SpriteMeshType.Tight);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="souvenirModule"></param>
+        /// <param name="width">how many circles will appear in each row</param>
+        /// <param name="height">how many circles will appear in each column</param>
+        /// <param name="radius">the radius of each circle</param>
+        /// <param name="litdots">A binary number that shows which does will be visible</param>
+        /// <param name="outline">If circle that are not visuble should have an outline</param>
+        /// <returns></returns>
+        public static Sprite GetCircleAnswer(SouvenirModule souvenirModule, int width, int height, int litdots, int radius, bool outline = false)
+        {
+            //Currently an exception is being thrown somewhere. I assume when 'binary' called, but I have not verified
+
+            //the binary reads from left to right of each circle
+            //Ex: If the width and height are both 2:
+            //1 will be the top left circle
+            //10 will be the top right circle
+            //101 will be the top right and top left circles
+            var binary = Convert.ToString(litdots, 2);
+            var gap = 10; // how many pixels will between each circle vertically and horizontally
+            var textureWidth =  width * radius * 2 + ((width - 1) * gap);
+            var textureHeight = height * radius * 2 + ((height - 1) * gap);
+            var pixelCount = textureWidth * textureHeight;
+            var key = $"{width}:{height}:{litdots}:{outline}";
+
+            //if the sprite is not cached, create it
+            if (!_circleSpriteCache.TryGetValue(key, out var tx))
+            {
+                //create the base of the texture
+                tx = new Texture2D(textureWidth, textureHeight, TextureFormat.ARGB32, false);
+                _circleSpriteCache.Add(key, tx);
+
+                var pixels = Ut.NewArray(pixelCount, _ => new Color32(0x00, 0x00, 0x00, 0x00));
+                
+                //Get the list of center poitns for each circle
+                //the first circle (top left)'s position will be the top left's position offsetted by the radius (plus for the x axis and minus for the y axis)
+                Vector2 topLeftCirclePos = new Vector2(radius, textureWidth - 1 - radius);
+
+                List<Vector2> circleCenters = new List<Vector2>() { topLeftCirclePos };
+                for (int column = 0; column < width; column++)
+                {
+                    for (int row = 0; row < height; row++)
+                    {
+                        int xoffset = (radius * 2 + gap) * column;
+                        int yoffset = -(radius * 2 + gap) * row;
+
+                        //get the center position for this circle
+                        circleCenters.Add(topLeftCirclePos + new Vector2(xoffset, yoffset));
+                    }
+                }
+
+                //for each pixel, figure out if the the pixel should be white or stay clear
+                for (int pixelIndex = 0; pixelIndex < pixelCount; pixelIndex++)
+                {
+                    //a pixel should be white if it intersects or is on the edge of a circle
+                    //this can be calculated by check if the distance between the pixel and the center position of the circle
+                    //is less than or equal to the radius
+                    foreach (Vector2 centerPos in circleCenters)
+                    {
+                        //if this circle shouldn't be drawn, move on
+                        if (binary[pixelIndex] == '0' && !outline)
+                            continue;
+
+                        Vector2 pixelPosition = new Vector2(pixelIndex % width, pixelIndex / width);
+                        float distanceSquared = Mathf.Pow(pixelPosition.x - centerPos.x, 2) + Mathf.Pow(pixelPosition.y - centerPos.y, 2);
+                        float radiusSquared = Mathf.Pow(radius, 2);
+
+                        //check if this dot falls in a circle that should just have its border drawn
+                        //check if this dots falls in a circle that should be filled in
+                        if ((binary[pixelIndex] == '0' && distanceSquared == radiusSquared) || 
+                            (binary[pixelIndex] == '1' && distanceSquared <= radiusSquared))
+                        {
+                            //set the pixel to white
+                            pixels[pixelIndex] = new Color32(0xFF, 0xF8, 0xDD, 0xFF);
+                        }
+                    }
+                }
+            }
+
+            var sprite = Sprite.Create(tx, new Rect(0, 0, textureWidth, textureHeight), new Vector2(0, .5f), textureHeight * (60f / 17));
+            sprite.name = key;
+
+            return sprite;
         }
 
         public static Sprite GenerateGridSprite(Coord coord, float size = 1f)

@@ -293,25 +293,27 @@ namespace Souvenir
 
             //# of row / cols
             //binary or arr of dots that are lit (drawm)
-            private int width;
-            private int height;
-            private int litDots;
+            private int width; // # of rows that will appear
+            private int height; //# of col that will appear
+            private int radius; //the radius of each circle
+            private int litDots; //which dots will be lit
+
             private int Count => width * height;
 
 
-            public CircleGenerator(int litDots) : this(2, 3, litDots) { }
 
-            public CircleGenerator(int width, int height, int litDots)
+            public CircleGenerator(int width, int height, int litDots, int radius)
             {
                 this.width = width;
                 this.height = height;
                 this.litDots = litDots;
+                this.radius = radius;
             }
 
             public override IEnumerable<Sprite> GetAnswers(SouvenirModule module)
             {
                 for (int ix = 0; ix < Count; ++ix)
-                    yield return Souvenir.Sprites.GetCircleAnswer(module);
+                    yield return Souvenir.Sprites.GetCircleAnswer(module, width, height, litDots, radius);
             }
         }
 
