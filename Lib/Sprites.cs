@@ -13,13 +13,19 @@ namespace Souvenir
         private static readonly Dictionary<string, Texture2D> _gridSpriteCache = new();
         private static readonly Dictionary<AudioClip, Texture2D> _audioSpriteCache = new();
 
-        private const int CIRCLE_GAP = 2; // Pixels between each circle vertically and horizontally
-
-        private static bool IsPointInCircle(int pixelX, int pixelY, int radius, int dotX, int dotY)
+        private static bool IsPointInCircle(int pixelX, int pixelY, int radius, int gap, int dotX, int dotY)
         {
-            var centerX = (2 * radius + CIRCLE_GAP) * dotX + radius;
-            var centerY = (2 * radius + CIRCLE_GAP) * dotY + radius;
+            var centerX = (2 * radius + gap) * dotX + radius;
+            var centerY = (2 * radius + gap) * dotY + radius;
             return (pixelX - centerX) * (pixelX - centerX) + (pixelY - centerY) * (pixelY - centerY) < radius * radius;
+        }
+
+        private static bool IsPointInAnnulus(int pixelX, int pixelY, int radius, int innerRadius, int gap, int dotX, int dotY)
+        {
+            var centerX = (2 * radius + gap) * dotX + radius;
+            var centerY = (2 * radius + gap) * dotY + radius;
+            var value = (pixelX - centerX) * (pixelX - centerX) + (pixelY - centerY) * (pixelY - centerY);
+            return value < radius * radius && value > innerRadius * innerRadius;
         }
 
         /// <summary>
@@ -27,14 +33,15 @@ namespace Souvenir
         /// </summary>
         /// <param name="width">How many circles will appear in each row.</param>
         /// <param name="height">How many circles will appear in each column.</param>
-        /// <param name="radius">The radius of each circle.</param>
         /// <param name="litdots">A bitfield specifying which circles are visible (LSB = top-left, going in reading order).</param>
+        /// <param name="radius">The radius of each circle, in pixels.</param>
         /// <param name="outline">Specifies whether circles that are not visible should have an outline.</param>
-        public static Sprite GetCircleAnswer(int width, int height, int litdots, int radius, bool outline = false)
+        /// <param name="gap">The gap between circles, in pixels.</param>
+        public static Sprite GetCircleAnswer(int width, int height, int litdots, int radius, bool outline, int gap)
         {
-            var textureWidth = width * radius * 2 + (width - 1) * CIRCLE_GAP;
-            var textureHeight = height * radius * 2 + (height - 1) * CIRCLE_GAP;
-            var key = $"{width}:{height}:{litdots}:{outline}";
+            var textureWidth = width * radius * 2 + (width - 1) * gap;
+            var textureHeight = height * radius * 2 + (height - 1) * gap;
+            var key = $"{width}:{height}:{litdots}:{radius}:{outline}:{gap}";
 
             // If the sprite is not cached, create it
             if (!_circleSpriteCache.TryGetValue(key, out var tx))
@@ -45,7 +52,8 @@ namespace Souvenir
                 {
                     for (var dotX = 0; dotX < width; dotX++)
                         for (var dotY = 0; dotY < height; dotY++)
-                            if ((litdots & (1 << (dotX + width * dotY))) != 0 && IsPointInCircle(pixel % textureWidth, pixel / textureWidth, radius, dotX, dotY))
+                            if ((litdots & (1 << (dotX + width * dotY))) != 0 ? IsPointInCircle(pixel % textureWidth, pixel / textureWidth, radius, gap, dotX, dotY) :
+                                outline && IsPointInAnnulus(pixel % textureWidth, pixel / textureWidth, radius, radius - 5, gap, dotX, dotY))
                                 return new Color32(0xFF, 0xF8, 0xDD, 0xFF);
                     return new Color32(0x00, 0x00, 0x00, 0x00);
                 }));

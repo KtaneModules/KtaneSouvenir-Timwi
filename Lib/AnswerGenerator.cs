@@ -291,15 +291,28 @@ namespace Souvenir
 
         public class Circles : AnswerGeneratorAttribute<Sprite>
         {
-            private readonly int _width; // # of rows
-            private readonly int _height; // # of columns
-            private readonly int _radius; // radius of each circle
+            private readonly int _width;
+            private readonly int _height;
+            private readonly int _radius;
+            private readonly int _gap;
 
-            public Circles(int width, int height, int radius)
+            /// <summary>Indicates that the pattern in which all circles are “off” should not be generated.</summary>
+            public bool SuppressEmpty { get; set; }
+
+            /// <summary>Indicates whether “off” circles should be represented by a circle outline (as opposed to be missing entirely).</summary>
+            public bool DrawOutline { get; set; }
+
+            /// <summary>Generates sprites in which circles are arranged in a rectilinear grid.</summary>
+            /// <param name="width">Specifies the number of circles per row.</param>
+            /// <param name="height">Specifies the number of circles per column.</param>
+            /// <param name="radius">Specifies the radius of each circle, in pixels.</param>
+            /// <param name="gap">Specifies the gap between circles, in pixels.</param>
+            public Circles(int width, int height, int radius, int gap)
             {
                 _width = width;
                 _height = height;
                 _radius = radius;
+                _gap = gap;
             }
 
             public override IEnumerable<Sprite> GetAnswers(SouvenirModule module)
@@ -307,13 +320,13 @@ namespace Souvenir
                 var maxDots = _width * _height;
                 if (maxDots >= 10)
                     while (true)
-                        yield return Sprites.GetCircleAnswer(_width, _height, Random.Range(0, 1 << maxDots), _radius);
+                        yield return Sprites.GetCircleAnswer(_width, _height, Random.Range(SuppressEmpty ? 1 : 0, 1 << maxDots), _radius, DrawOutline, _gap);
 
                 // With no more than 6 possible values, the above case may go into an infinite loop trying to generate 5 distinct values.
                 // In this case, we will return all possible values in a random order and then halt.
-                var dotPatterns = Enumerable.Range(0, 1 << maxDots).ToArray().Shuffle();
+                var dotPatterns = Enumerable.Range(SuppressEmpty ? 1 : 0, (1 << maxDots) - (SuppressEmpty ? 1 : 0)).ToArray().Shuffle();
                 foreach (var dotPattern in dotPatterns)
-                    yield return Sprites.GetCircleAnswer(_width, _height, dotPattern, _radius);
+                    yield return Sprites.GetCircleAnswer(_width, _height, dotPattern, _radius, DrawOutline, _gap);
             }
         }
 
