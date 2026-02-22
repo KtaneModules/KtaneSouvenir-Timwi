@@ -3126,12 +3126,6 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
                     Question = "Какое было начальное положение {0}?",
                     Conjugation = Conjugation.GenitivePlural,
                 },
-                [SColoredSwitches.WhenLEDsCameOn] = new()
-                {
-                    // English: What was the position of the switches when the LEDs came on in {0}?
-                    Question = "Какое было положение у {0}, когда загорелись светодиоды?",
-                    Conjugation = Conjugation.GenitivePlural,
-                },
             },
         },
 

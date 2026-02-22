@@ -3026,11 +3026,6 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
                     // English: What was the initial position of the switches in {0}?
                     Question = "{0}の初期配置は？",
                 },
-                [SColoredSwitches.WhenLEDsCameOn] = new()
-                {
-                    // English: What was the position of the switches when the LEDs came on in {0}?
-                    Question = "{0}のLEDが示したスイッチの位置は？",
-                },
             },
         },
 

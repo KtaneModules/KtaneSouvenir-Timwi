@@ -3102,11 +3102,6 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
                     // English: What was the initial position of the switches in {0}?
                     Question = "Wie lagen bei {0} die Schalter am Anfang?",
                 },
-                [SColoredSwitches.WhenLEDsCameOn] = new()
-                {
-                    // English: What was the position of the switches when the LEDs came on in {0}?
-                    Question = "Wie lagen bei {0} die Schalter, als die LEDs angingen?",
-                },
             },
         },
 
