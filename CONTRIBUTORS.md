@@ -77,19 +77,19 @@ The following is a list of modules supported by Souvenir, and the fine people wh
     Cruel Binary          │  Forget Me Not      │  Light Bulbs           │  Recursive Password     │  WASD
     Cruel Keypads         │  Forget Me Now      │  Mad Memory            │  Safety Square          │
 
-## Implemented by Quinn Wuest (52)
+## Implemented by Quinn Wuest (53)
 
-    .--/---/..-.       │  Denial Displays           │  Not Colored Switches  │  Parity               │  Synapse Says
-    4D Tunnels         │  Double Digits             │  Not Connection Check  │  Quadrants            │  Triple Term
-    A Square           │  English Entries           │  Not Coordinates       │  RGB Encryption       │  Uncolour Flash
-    Alcoholic Rampage  │  Épelle-moi Ça             │  Not Morsematics       │  Robo-Scanner         │  Unpleasant Squares
-    Ángel Hernández    │  Guess Who?                │  Not Murder            │  Rule of Three        │  Varicolour Flash
-    Bamboozled Again   │  Hunting                   │  Not Number Pad        │  Scramboozled Eggain  │  Who’s on Gas
-    Big Circle         │  Letter Math               │  Not Perspective Pegs  │  Simon Said           │  Word Count
-    Bulb, The          │  Match Refereeing          │  Not The Bulb          │  Simon Shuffles       │  xobekuJ ehT
-    Caesar Psycho      │  Navigation Determination  │  Not X01               │  Simultaneous Simons  │
-    Coordination       │  Neptune                   │  Off Keys              │  Slow Math            │
-    Cyan Button, The   │  Nim                       │  Papa’s Pizzeria       │  Small Talk           │
+    .--/---/..-.       │  Denial Displays           │  Nim                   │  Papa’s Pizzeria      │  Small Talk
+    4D Tunnels         │  Double Digits             │  Not Colored Switches  │  Parity               │  Synapse Says
+    A Square           │  English Entries           │  Not Connection Check  │  Quadrants            │  Triple Term
+    Alcoholic Rampage  │  Épelle-moi Ça             │  Not Coordinates       │  RGB Encryption       │  Uncolour Flash
+    Ángel Hernández    │  Guess Who?                │  Not Morsematics       │  Robo-Scanner         │  Unpleasant Squares
+    Bamboozled Again   │  Hunting                   │  Not Murder            │  Rule of Three        │  Varicolour Flash
+    Big Circle         │  Letter Math               │  Not Number Pad        │  Scramboozled Eggain  │  Who’s on Gas
+    Bulb, The          │  Match Refereeing          │  Not Perspective Pegs  │  Simon Said           │  Word Count
+    Caesar Psycho      │  Mystic Square             │  Not The Bulb          │  Simon Shuffles       │  xobekuJ ehT
+    Coordination       │  Navigation Determination  │  Not X01               │  Simultaneous Simons  │
+    Cyan Button, The   │  Neptune                   │  Off Keys              │  Slow Math            │
 
 ## Implemented by luisdiogo98 (45)
 
@@ -162,17 +162,17 @@ The following is a list of modules supported by Souvenir, and the fine people wh
     Coinage   │  Linq                 │  Phosphorescence   │  Reformed Role Reversal  │
     Etterna   │  Octadecayotton, The  │  Placeholder Talk  │  Role Reversal           │
 
-## Implemented by CaitSith2 (12)
-
-    Creation   │  LED Encryption  │  Souvenir              │  Text Field
-    Gridlock   │  Morse-A-Maze    │  Symbol Cycle          │  Third Base
-    Ice Cream  │  Mystic Square   │  Symbolic Coordinates  │  Turtle Robot
-
 ## Implemented by KiloBites (12)
 
     Caesar's Maths                   │  Holographic Memory       │  Off-White Cipher     │  Undertunneling
     ƎNA Cipher                       │  Missing Letter, The      │  Painting Cube        │  Unfair's Cruel Revenge
     French Republican Calendar, The  │  Multiverse Hotline, The  │  Pattern Recognition  │  X-Rotor
+
+## Implemented by CaitSith2 (11)
+
+    Creation   │  LED Encryption  │  Symbol Cycle          │  Third Base
+    Gridlock   │  Morse-A-Maze    │  Symbolic Coordinates  │  Turtle Robot
+    Ice Cream  │  Souvenir        │  Text Field            │
 
 ## Implemented by VFlyer (11)
 

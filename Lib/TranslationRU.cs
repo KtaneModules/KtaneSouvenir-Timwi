@@ -9474,25 +9474,13 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
         // Mystic Square
         [typeof(SMysticSquare)] = new()
         {
-            ModuleName = "Загадочном квадрате",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SMysticSquare.Skull] = new()
+                [SMysticSquare.CenterTile] = new()
                 {
-                    // English: Where was the skull in {0}?
-                    Question = "Где находился череп {0}?",
-                    Answers = new()
-                    {
-                        ["top left"] = "сверху слева",
-                        ["top middle"] = "сверху посередине",
-                        ["top right"] = "сверху справа",
-                        ["middle left"] = "посередине слева",
-                        ["center"] = "в центре",
-                        ["middle right"] = "посередине справа",
-                        ["bottom left"] = "снизу слева",
-                        ["bottom middle"] = "снизу посередине",
-                        ["bottom right"] = "снизу справа",
-                    },
+                    // English: What digit was initially in the center in {0}?
+                    Question = "What digit was initially in the center in {0}?",
                 },
             },
         },

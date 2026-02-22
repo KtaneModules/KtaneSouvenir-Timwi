@@ -9676,22 +9676,10 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
             NeedsTranslation = true,
             Questions = new()
             {
-                [SMysticSquare.Skull] = new()
+                [SMysticSquare.CenterTile] = new()
                 {
-                    // English: Where was the skull in {0}?
-                    Question = "Where was the skull in {0}?",
-                    Answers = new()
-                    {
-                        ["top left"] = "top left",
-                        ["top middle"] = "top middle",
-                        ["top right"] = "top right",
-                        ["middle left"] = "middle left",
-                        ["center"] = "center",
-                        ["middle right"] = "middle right",
-                        ["bottom left"] = "bottom left",
-                        ["bottom middle"] = "bottom middle",
-                        ["bottom right"] = "bottom right",
-                    },
+                    // English: What digit was initially in the center in {0}?
+                    Question = "What digit was initially in the center in {0}?",
                 },
             },
         },

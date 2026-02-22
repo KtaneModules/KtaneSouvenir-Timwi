@@ -9429,25 +9429,13 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
         // Mystic Square
         [typeof(SMysticSquare)] = new()
         {
-            ModuleName = "神秘スクエア",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SMysticSquare.Skull] = new()
+                [SMysticSquare.CenterTile] = new()
                 {
-                    // English: Where was the skull in {0}?
-                    Question = "{0}のどくろの位置は？",
-                    Answers = new()
-                    {
-                        ["top left"] = "左上",
-                        ["top middle"] = "上",
-                        ["top right"] = "右上",
-                        ["middle left"] = "左",
-                        ["center"] = "中央",
-                        ["middle right"] = "右",
-                        ["bottom left"] = "左下",
-                        ["bottom middle"] = "下",
-                        ["bottom right"] = "右下",
-                    },
+                    // English: What digit was initially in the center in {0}?
+                    Question = "What digit was initially in the center in {0}?",
                 },
             },
         },
