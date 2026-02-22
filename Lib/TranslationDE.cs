@@ -6429,11 +6429,6 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
                     // English: What was the starting location in {0}?
                     Question = "Was war bei {0} die Startposition?",
                 },
-                [SGridlock.EndingLocation] = new()
-                {
-                    // English: What was the ending location in {0}?
-                    Question = "Was war bei {0} die Endposition?",
-                },
             },
         },
 

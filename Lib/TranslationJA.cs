@@ -6232,11 +6232,6 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
                     // English: What was the starting location in {0}?
                     Question = "{0}の開始位置は？",
                 },
-                [SGridlock.EndingLocation] = new()
-                {
-                    // English: What was the ending location in {0}?
-                    Question = "{0}の終了位置は？",
-                },
             },
         },
 

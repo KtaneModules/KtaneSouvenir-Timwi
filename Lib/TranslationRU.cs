@@ -6317,11 +6317,6 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
                     // English: What was the starting location in {0}?
                     Question = "Какая была начальная позиция {0}?",
                 },
-                [SGridlock.EndingLocation] = new()
-                {
-                    // English: What was the ending location in {0}?
-                    Question = "Какая была конечная позиция {0}?",
-                },
             },
         },
 
