@@ -3456,12 +3456,6 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
             ModuleName = "Координатах",
             Questions = new()
             {
-                [SCoordinates.FirstSolution] = new()
-                {
-                    // English: What was the solution you selected first in {0}?
-                    Question = "Какую координату вы выбрали первой {0}?",
-                    Conjugation = Conjugation.в_PrepositivePlural,
-                },
                 [SCoordinates.Size] = new()
                 {
                     // English: What was the grid size in {0}?

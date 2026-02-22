@@ -3443,11 +3443,6 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
             Gender = Gender.Plural,
             Questions = new()
             {
-                [SCoordinates.FirstSolution] = new()
-                {
-                    // English: What was the solution you selected first in {0}?
-                    Question = "Welche Lösung wurde bei {0} als erstes gewählt?",
-                },
                 [SCoordinates.Size] = new()
                 {
                     // English: What was the grid size in {0}?

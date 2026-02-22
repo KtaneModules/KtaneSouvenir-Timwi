@@ -3352,11 +3352,6 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
             ModuleName = "座標",
             Questions = new()
             {
-                [SCoordinates.FirstSolution] = new()
-                {
-                    // English: What was the solution you selected first in {0}?
-                    Question = "{0}で最初に選んだ回答は？",
-                },
                 [SCoordinates.Size] = new()
                 {
                     // English: What was the grid size in {0}?
