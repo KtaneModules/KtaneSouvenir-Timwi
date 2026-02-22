@@ -6888,30 +6888,14 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
         // Hunting
         [typeof(SHunting)] = new()
         {
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SHunting.ColumnsRows] = new()
+                [SHunting.DisplayedSymbols] = new()
                 {
-                    // English: Which of the first three stages of {0} had the {1} symbol {2}?
-                    // Example: Which of the first three stages of Hunting had the column symbol first?
-                    Question = "На каком из первых трёх этапов {0} символ {1} был {2}-м?",
-                    Conjugation = Conjugation.GenitiveMascNeuter,
-                    Arguments = new()
-                    {
-                        ["column"] = "столбца",
-                        ["row"] = "строки",
-                    },
-                    Answers = new()
-                    {
-                        ["none"] = "Ни на каком",
-                        ["first"] = "На 1-м",
-                        ["second"] = "На 2-м",
-                        ["first two"] = "На 1-м и 2-м",
-                        ["third"] = "На 3-м",
-                        ["first & third"] = "На 1-м и 3-м",
-                        ["second & third"] = "На 2-м и 3-м",
-                        ["all three"] = "На всех трёх",
-                    },
+                    // English: Which of these symbols was displayed in the {1} stage of {0}?
+                    // Example: Which of these symbols was displayed in the first stage of Hunting?
+                    Question = "Which of these symbols was displayed in the {1} stage of {0}?",
                 },
             },
         },

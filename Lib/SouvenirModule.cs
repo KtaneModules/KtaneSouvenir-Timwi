@@ -43,6 +43,7 @@ public partial class SouvenirModule : MonoBehaviour
     public Sprite[] FuseBoxColorSprites;
     public Sprite[] FuseBoxArrowSprites;
     public Sprite[] HingesSprites;
+    public Sprite[] HuntingSprites;
     public Sprite[] JengaSprites;
     public Sprite[] KeypadSprites;
     public Sprite[] LadderLotterySprites;

@@ -5,30 +5,34 @@ using static Souvenir.AnswerLayout;
 
 public enum SHunting
 {
-    [SouvenirQuestion("Which of the first three stages of {0} had the {1} symbol {2}?", TwoColumns4Answers, "none", "first", "second", "first two", "third", "first & third", "second & third", "all three", TranslateAnswers = true, TranslateArguments = [true, false], Arguments = ["column", QandA.Ordinal, "row", QandA.Ordinal], ArgumentGroupSize = 2)]
-    ColumnsRows
+    [SouvenirQuestion("Which of these symbols was displayed in the {1} stage of {0}?", ThreeColumns6Answers, Type = AnswerType.Sprites, SpriteFieldName = "HuntingSprites", Arguments = [QandA.Ordinal], ArgumentGroupSize = 1)]
+    DisplayedSymbols
 }
 
 public partial class SouvenirModule
 {
-    [SouvenirHandler("hunting", "Hunting", typeof(SHunting), "Timwi")]
+    [SouvenirHandler("hunting", "Hunting", typeof(SHunting), "Quinn Wuest")]
     private IEnumerator<SouvenirInstruction> ProcessHunting(ModuleData module)
     {
         var comp = GetComponent(module, "hunting");
         var fldStage = GetIntField(comp, "stage");
-        var fldReverseClues = GetField<bool>(comp, "reverseClues");
+        var fldDisplayedClues = GetField<TextMesh[]>(comp, "cluesTextMesh", isPublic: true);
 
         yield return WaitForActivate;
 
         var hasRowFirst = new bool[4];
+        var clues = new Sprite[4][] { new Sprite[2], new Sprite[2], new Sprite[2], new Sprite[2] };
+        var stringIxs = "oWzAMUfH";
+
         while (module.Unsolved)
         {
-            hasRowFirst[fldStage.Get() - 1] = fldReverseClues.Get();
+            var stage = fldStage.Get() - 1;
+            var displayedClues = fldDisplayedClues.Get();
+            clues[stage][0] = HuntingSprites[stringIxs.IndexOf(displayedClues[0].text)];
+            clues[stage][1] = HuntingSprites[stringIxs.IndexOf(displayedClues[1].text)];
             yield return new WaitForSeconds(.1f);
         }
-        foreach (var row in new[] { false, true })
-            foreach (var first in new[] { false, true })
-                yield return question(SHunting.ColumnsRows, args: [row ? "row" : "column", first ? "first" : "second"])
-                    .Answers(SHunting.ColumnsRows.GetAnswers()[(hasRowFirst[0] ^ row ^ first ? 1 : 0) | (hasRowFirst[1] ^ row ^ first ? 2 : 0) | (hasRowFirst[2] ^ row ^ first ? 4 : 0)]);
+        for (int st = 0; st < 4; st++)
+            yield return question(SHunting.DisplayedSymbols, args: [Ordinal(st + 1)]).Answers(clues[st], all: HuntingSprites);
     }
 }

@@ -7013,31 +7013,14 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
         // Hunting
         [typeof(SHunting)] = new()
         {
-            ModuleName = "Jagd",
-            Gender = Gender.Feminine,
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SHunting.ColumnsRows] = new()
+                [SHunting.DisplayedSymbols] = new()
                 {
-                    // English: Which of the first three stages of {0} had the {1} symbol {2}?
-                    // Example: Which of the first three stages of Hunting had the column symbol first?
-                    Question = "In welchen der ersten drei Stufen von {0} war das {1} das {2}e?",
-                    Arguments = new()
-                    {
-                        ["column"] = "Spaltensymbol",
-                        ["row"] = "Reihensymbol",
-                    },
-                    Answers = new()
-                    {
-                        ["none"] = "keine",
-                        ["first"] = "erste",
-                        ["second"] = "zweite",
-                        ["first two"] = "erste & zweite",
-                        ["third"] = "dritte",
-                        ["first & third"] = "erste & dritte",
-                        ["second & third"] = "zweite & dritte",
-                        ["all three"] = "alle drei",
-                    },
+                    // English: Which of these symbols was displayed in the {1} stage of {0}?
+                    // Example: Which of these symbols was displayed in the first stage of Hunting?
+                    Question = "Which of these symbols was displayed in the {1} stage of {0}?",
                 },
             },
         },

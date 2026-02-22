@@ -6807,30 +6807,14 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
         // Hunting
         [typeof(SHunting)] = new()
         {
-            ModuleName = "狩猟",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SHunting.ColumnsRows] = new()
+                [SHunting.DisplayedSymbols] = new()
                 {
-                    // English: Which of the first three stages of {0} had the {1} symbol {2}?
-                    // Example: Which of the first three stages of Hunting had the column symbol first?
-                    Question = "{0}の最初3つのステージのうち、{2}番目に{1}シンボルを持っていたのはどれ？",
-                    Arguments = new()
-                    {
-                        ["column"] = "列",
-                        ["row"] = "段",
-                    },
-                    Answers = new()
-                    {
-                        ["none"] = "なし",
-                        ["first"] = "1",
-                        ["second"] = "2",
-                        ["first two"] = "最初と2番目",
-                        ["third"] = "3",
-                        ["first & third"] = "最初と最後",
-                        ["second & third"] = "2番目と最後",
-                        ["all three"] = "3つ全て",
-                    },
+                    // English: Which of these symbols was displayed in the {1} stage of {0}?
+                    // Example: Which of these symbols was displayed in the first stage of Hunting?
+                    Question = "Which of these symbols was displayed in the {1} stage of {0}?",
                 },
             },
         },
