@@ -40,10 +40,11 @@ public partial class SouvenirModule
         for (var pos = 0; pos < 3; pos++)
             if (labelTexts[pos] != labels[pos].text)
             {
+                // Do not include the 7th digit, because:
+                // - In rule seed 0, "buzz" will cause the last digit to only be one of two digits (and can be reverse calculated)
+                // - In other rule seeds, similar calculations/deductions can be made (and can include either of Fizz or Buzz)
                 for (var digit = 0; digit < 6; digit++)
                     yield return question(SFizzBuzz.DisplayedNumbers, args: [Ordinal(digit + 1), displays[pos]]).Answers(displayedDigits[pos][digit].ToString());
-                if (!labels[pos].text.ToLowerInvariant().Contains("buzz")) // Do not ask about the last digit if the answer was buzz because there are only two possible correct answers.
-                    yield return question(SFizzBuzz.DisplayedNumbers, args: ["7th", displays[pos]]).Answers(displayedDigits[pos][6].ToString());
                 any = true;
             }
 
