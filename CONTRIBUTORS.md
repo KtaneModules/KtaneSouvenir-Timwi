@@ -77,18 +77,19 @@ The following is a list of modules supported by Souvenir, and the fine people wh
     Cruel Binary          │  Forget Me Not      │  Light Bulbs           │  Recursive Password     │  WASD
     Cruel Keypads         │  Forget Me Now      │  Mad Memory            │  Safety Square          │
 
-## Implemented by Quinn Wuest (50)
+## Implemented by Quinn Wuest (51)
 
-    .--/---/..-.       │  Denial Displays           │  Not Colored Switches  │  Papa’s Pizzeria      │  Slow Math
-    4D Tunnels         │  Double Digits             │  Not Connection Check  │  Parity               │  Small Talk
-    A Square           │  English Entries           │  Not Coordinates       │  Quadrants            │  Synapse Says
-    Alcoholic Rampage  │  Épelle-moi Ça             │  Not Morsematics       │  RGB Encryption       │  Triple Term
-    Ángel Hernández    │  Guess Who?                │  Not Murder            │  Robo-Scanner         │  Uncolour Flash
-    Bamboozled Again   │  Letter Math               │  Not Number Pad        │  Rule of Three        │  Unpleasant Squares
-    Bulb, The          │  Match Refereeing          │  Not Perspective Pegs  │  Scramboozled Eggain  │  Varicolour Flash
-    Caesar Psycho      │  Navigation Determination  │  Not The Bulb          │  Simon Said           │  Who’s on Gas
-    Coordination       │  Neptune                   │  Not X01               │  Simon Shuffles       │  Word Count
-    Cyan Button, The   │  Nim                       │  Off Keys              │  Simultaneous Simons  │  xobekuJ ehT
+    .--/---/..-.       │  Denial Displays           │  Not Connection Check  │  Quadrants            │  Triple Term
+    4D Tunnels         │  Double Digits             │  Not Coordinates       │  RGB Encryption       │  Uncolour Flash
+    A Square           │  English Entries           │  Not Morsematics       │  Robo-Scanner         │  Unpleasant Squares
+    Alcoholic Rampage  │  Épelle-moi Ça             │  Not Murder            │  Rule of Three        │  Varicolour Flash
+    Ángel Hernández    │  Guess Who?                │  Not Number Pad        │  Scramboozled Eggain  │  Who’s on Gas
+    Bamboozled Again   │  Letter Math               │  Not Perspective Pegs  │  Simon Said           │  Word Count
+    Big Circle         │  Match Refereeing          │  Not The Bulb          │  Simon Shuffles       │  xobekuJ ehT
+    Bulb, The          │  Navigation Determination  │  Not X01               │  Simultaneous Simons  │
+    Caesar Psycho      │  Neptune                   │  Off Keys              │  Slow Math            │
+    Coordination       │  Nim                       │  Papa’s Pizzeria       │  Small Talk           │
+    Cyan Button, The   │  Not Colored Switches      │  Parity                │  Synapse Says         │
 
 ## Implemented by luisdiogo98 (45)
 
@@ -155,17 +156,17 @@ The following is a list of modules supported by Souvenir, and the fine people wh
     Maze         │  Not Maze        │  Not the Button      │  Simon Says        │  Wire Sequence
     Memory       │  Not Morse Code  │  Not Who’s on First  │  Who’s on First    │
 
-## Implemented by CaitSith2 (13)
-
-    Big Circle  │  Ice Cream       │  Mystic Square  │  Symbolic Coordinates  │  Turtle Robot
-    Creation    │  LED Encryption  │  Souvenir       │  Text Field            │
-    Gridlock    │  Morse-A-Maze    │  Symbol Cycle   │  Third Base            │
-
 ## Implemented by Emik (13)
 
     1D Chess  │  hexOS                │  Palindromes       │  Quaver                  │  Sorting
     Coinage   │  Linq                 │  Phosphorescence   │  Reformed Role Reversal  │
     Etterna   │  Octadecayotton, The  │  Placeholder Talk  │  Role Reversal           │
+
+## Implemented by CaitSith2 (12)
+
+    Creation   │  LED Encryption  │  Souvenir              │  Text Field
+    Gridlock   │  Morse-A-Maze    │  Symbol Cycle          │  Third Base
+    Ice Cream  │  Mystic Square   │  Symbolic Coordinates  │  Turtle Robot
 
 ## Implemented by KiloBites (12)
 

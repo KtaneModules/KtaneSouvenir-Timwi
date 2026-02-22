@@ -1484,25 +1484,17 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
         // Big Circle
         [typeof(SBigCircle)] = new()
         {
-            ModuleName = "Большом круге",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SBigCircle.Colors] = new()
+                [SBigCircle.SpinDirection] = new()
                 {
-                    // English: What color was {1} in the solution to {0}?
-                    // Example: What color was first in the solution to Big Circle?
-                    Question = "Какой правильный цвет был {1}-м на {0}?",
-                    Conjugation = Conjugation.PrepositiveMascNeuter,
+                    // English: Which direction was the circle spinning in {0}?
+                    Question = "Which direction was the circle spinning in {0}?",
                     Answers = new()
                     {
-                        ["Red"] = "Красный",
-                        ["Orange"] = "Оранжевый",
-                        ["Yellow"] = "Жёлтый",
-                        ["Green"] = "Зелёный",
-                        ["Blue"] = "Синий",
-                        ["Magenta"] = "Пурпурный",
-                        ["White"] = "Белый",
-                        ["Black"] = "Чёрный",
+                        ["clockwise"] = "clockwise",
+                        ["counterclockwise"] = "counterclockwise",
                     },
                 },
             },

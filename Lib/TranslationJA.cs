@@ -1395,24 +1395,17 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
         // Big Circle
         [typeof(SBigCircle)] = new()
         {
-            ModuleName = "ビッグサークル",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SBigCircle.Colors] = new()
+                [SBigCircle.SpinDirection] = new()
                 {
-                    // English: What color was {1} in the solution to {0}?
-                    // Example: What color was first in the solution to Big Circle?
-                    Question = "{0}の解法において{1}番目の色は？",
+                    // English: Which direction was the circle spinning in {0}?
+                    Question = "Which direction was the circle spinning in {0}?",
                     Answers = new()
                     {
-                        ["Red"] = "赤",
-                        ["Orange"] = "オレンジ",
-                        ["Yellow"] = "黄",
-                        ["Green"] = "緑",
-                        ["Blue"] = "青",
-                        ["Magenta"] = "マゼンタ",
-                        ["White"] = "白",
-                        ["Black"] = "黒",
+                        ["clockwise"] = "clockwise",
+                        ["counterclockwise"] = "counterclockwise",
                     },
                 },
             },

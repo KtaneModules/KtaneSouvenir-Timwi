@@ -1439,25 +1439,17 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
         // Big Circle
         [typeof(SBigCircle)] = new()
         {
-            ModuleName = "Großer Kreis",
-            ModuleNameDative = "Großen Kreis",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SBigCircle.Colors] = new()
+                [SBigCircle.SpinDirection] = new()
                 {
-                    // English: What color was {1} in the solution to {0}?
-                    // Example: What color was first in the solution to Big Circle?
-                    Question = "Welche Farbe war bei {0} die {1}e Farbe in der Lösung?",
+                    // English: Which direction was the circle spinning in {0}?
+                    Question = "Which direction was the circle spinning in {0}?",
                     Answers = new()
                     {
-                        ["Red"] = "Rot",
-                        ["Orange"] = "Orange",
-                        ["Yellow"] = "Gelb",
-                        ["Green"] = "Grün",
-                        ["Blue"] = "Blau",
-                        ["Magenta"] = "Magenta",
-                        ["White"] = "Weiß",
-                        ["Black"] = "Schwarz",
+                        ["clockwise"] = "clockwise",
+                        ["counterclockwise"] = "counterclockwise",
                     },
                 },
             },
