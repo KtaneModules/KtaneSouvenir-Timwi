@@ -7194,14 +7194,22 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
         // The Jewel Vault
         [typeof(SJewelVault)] = new()
         {
-            ModuleName = "Хранилище драгоценностей",
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SJewelVault.Wheels] = new()
+                [SJewelVault.WheelTurns] = new()
                 {
-                    // English: What number was wheel {1} in {0}?
-                    // Example: What number was wheel A in The Jewel Vault?
-                    Question = "Какой был номер у колеса {1} {0}?",
+                    // English: Which wheel turned as a result of turning wheel {1} in {0}?
+                    // Example: Which wheel turned as a result of turning wheel 1 in The Jewel Vault?
+                    Question = "Which wheel turned as a result of turning Wheel {1} in {0}?",
+                    Answers = new()
+                    {
+                        ["1"] = "1",
+                        ["2"] = "2",
+                        ["3"] = "3",
+                        ["4"] = "4",
+                        ["none"] = "none",
+                    },
                 },
             },
         },

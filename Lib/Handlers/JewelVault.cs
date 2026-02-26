@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Souvenir;
 using static Souvenir.AnswerLayout;
 
 public enum SJewelVault
 {
-    [SouvenirQuestion("What number was wheel {1} in {0}?", TwoColumns4Answers, Arguments = ["A", "B", "C", "D"], ArgumentGroupSize = 1)]
-    [AnswerGenerator.Integers(1, 4)]
-    Wheels
+    [SouvenirQuestion("Which wheel turned as a result of turning wheel {1} in {0}?", TwoColumns4Answers, "1", "2", "3", "4", "none", Arguments = ["1", "2", "3", "4"], ArgumentGroupSize = 1, TranslateAnswers = true)]
+    WheelTurns
 }
 
 public partial class SouvenirModule
 {
-    [SouvenirHandler("jewelVault", "Jewel Vault", typeof(SJewelVault), "luisdiogo98", AddThe = true)]
+    [SouvenirHandler("jewelVault", "Jewel Vault", typeof(SJewelVault), "Quinn Wuest", AddThe = true)]
     private IEnumerator<SouvenirInstruction> ProcessJewelVault(ModuleData module)
     {
         var comp = GetComponent(module, "jewelWheelsScript");
@@ -23,6 +23,10 @@ public partial class SouvenirModule
         yield return WaitForSolve;
 
         for (var ix = 0; ix < assignedWheels.Count; ix++)
-            yield return question(SJewelVault.Wheels, args: ["ABCD".Substring(ix, 1)]).Answers((Array.IndexOf(wheels, assignedWheels[ix]) + 1).ToString());
+        {
+            var wheelIx = assignedWheels.IndexOf(wheels[ix]);
+            string answerStr = wheelIx == 0 ? "none" : (Array.IndexOf(wheels, assignedWheels[wheelIx - 1]) + 1).ToString();
+            yield return question(SJewelVault.WheelTurns, args: [(ix + 1).ToString()]).Answers(answerStr, all: SJewelVault.WheelTurns.GetAnswers().Where(a => a != (ix + 1).ToString()).ToArray());
+        }
     }
 }

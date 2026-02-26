@@ -7337,16 +7337,22 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
         // The Jewel Vault
         [typeof(SJewelVault)] = new()
         {
-            ModuleName = "Der Juwelen-Tresor",
-            ModuleNameDative = "Juwelen-Tresor",
-            Gender = Gender.Masculine,
+            NeedsTranslation = true,
             Questions = new()
             {
-                [SJewelVault.Wheels] = new()
+                [SJewelVault.WheelTurns] = new()
                 {
-                    // English: What number was wheel {1} in {0}?
-                    // Example: What number was wheel A in The Jewel Vault?
-                    Question = "Welche Zahl gehörte bei {0} zum Rad {1}?",
+                    // English: Which wheel turned as a result of turning wheel {1} in {0}?
+                    // Example: Which wheel turned as a result of turning wheel 1 in The Jewel Vault?
+                    Question = "Which wheel turned as a result of turning Wheel {1} in {0}?",
+                    Answers = new()
+                    {
+                        ["1"] = "1",
+                        ["2"] = "2",
+                        ["3"] = "3",
+                        ["4"] = "4",
+                        ["none"] = "none",
+                    },
                 },
             },
         },
