@@ -9210,18 +9210,6 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
             ModuleName = "迷路のネズミ",
             Questions = new()
             {
-                [SMouseInTheMaze.Sphere] = new()
-                {
-                    // English: Which color sphere was the goal in {0}?
-                    Question = "{0}のゴールの球の色は？",
-                    Answers = new()
-                    {
-                        ["white"] = "白",
-                        ["green"] = "緑",
-                        ["blue"] = "青",
-                        ["yellow"] = "黄",
-                    },
-                },
                 [SMouseInTheMaze.Torus] = new()
                 {
                     // English: What color was the torus in {0}?

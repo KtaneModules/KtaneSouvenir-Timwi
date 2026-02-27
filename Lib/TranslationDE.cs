@@ -9447,18 +9447,6 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
             Gender = Gender.Feminine,
             Questions = new()
             {
-                [SMouseInTheMaze.Sphere] = new()
-                {
-                    // English: Which color sphere was the goal in {0}?
-                    Question = "Welche Farbe hatte bei {0} die Zielkugel?",
-                    Answers = new()
-                    {
-                        ["white"] = "weiß",
-                        ["green"] = "grün",
-                        ["blue"] = "blau",
-                        ["yellow"] = "gelb",
-                    },
-                },
                 [SMouseInTheMaze.Torus] = new()
                 {
                     // English: What color was the torus in {0}?

@@ -9250,19 +9250,6 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
             ModuleName = "Мыши в лабиринте",
             Questions = new()
             {
-                [SMouseInTheMaze.Sphere] = new()
-                {
-                    // English: Which color sphere was the goal in {0}?
-                    Question = "Какого цвета была целевая сфера {0}?",
-                    Conjugation = Conjugation.в_PrepositiveFeminine,
-                    Answers = new()
-                    {
-                        ["white"] = "Белая",
-                        ["green"] = "Зелёная",
-                        ["blue"] = "Синяя",
-                        ["yellow"] = "Жёлтая",
-                    },
-                },
                 [SMouseInTheMaze.Torus] = new()
                 {
                     // English: What color was the torus in {0}?
