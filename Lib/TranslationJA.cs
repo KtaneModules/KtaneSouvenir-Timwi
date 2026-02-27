@@ -8358,11 +8358,6 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
             ModuleName = "連打算数",
             Questions = new()
             {
-                [SMashematics.Answer] = new()
-                {
-                    // English: What was the answer in {0}?
-                    Question = "{0}の答えは？",
-                },
                 [SMashematics.Calculation] = new()
                 {
                     // English: What was the {1} number in the equation on {0}?

@@ -8589,11 +8589,6 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
             NeedsTranslation = true,
             Questions = new()
             {
-                [SMashematics.Answer] = new()
-                {
-                    // English: What was the answer in {0}?
-                    Question = "What was the answer in {0}?",
-                },
                 [SMashematics.Calculation] = new()
                 {
                     // English: What was the {1} number in the equation on {0}?

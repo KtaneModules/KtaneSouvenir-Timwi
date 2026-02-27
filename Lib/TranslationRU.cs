@@ -8413,11 +8413,6 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
         {
             Questions = new()
             {
-                [SMashematics.Answer] = new()
-                {
-                    // English: What was the answer in {0}?
-                    Question = "Какой был верный ответ {0}?",
-                },
                 [SMashematics.Calculation] = new()
                 {
                     // English: What was the {1} number in the equation on {0}?
