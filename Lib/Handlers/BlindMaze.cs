@@ -6,11 +6,7 @@ using static Souvenir.AnswerLayout;
 public enum SBlindMaze
 {
     [SouvenirQuestion("What color was the {1} button in {0}?", TwoColumns4Answers, "Red", "Green", "Blue", "Gray", "Yellow", TranslateAnswers = true, TranslateArguments = [true], Arguments = ["north", "east", "west", "south"], ArgumentGroupSize = 1)]
-    Colors,
-
-    [SouvenirQuestion("Which maze did you solve {0} on?", ThreeColumns6Answers)]
-    [AnswerGenerator.Integers(0, 9)]
-    Maze
+    Colors
 }
 
 public partial class SouvenirModule
@@ -21,9 +17,6 @@ public partial class SouvenirModule
         var comp = GetComponent(module, "BlindMaze");
         yield return WaitForSolve;
 
-        // Despite the name “currentMaze”, this field actually contains the number of solved modules when Blind Maze was solved
-        var numSolved = GetIntField(comp, "currentMaze").Get(v => v < 0 ? "negative" : null);
-        var lastDigit = GetIntField(comp, "LastDigit").Get(min: 0, max: 9);
         var buttonColors = GetArrayField<int>(comp, "buttonColors").Get(expectedLength: 4, validator: bc => bc is < 0 or > 4 ? "expected 0–4" : null);
 
         var colorNames = new[] { "Red", "Green", "Blue", "Gray", "Yellow" };
@@ -31,6 +24,5 @@ public partial class SouvenirModule
 
         for (var ix = 0; ix < buttonColors.Length; ix++)
             yield return question(SBlindMaze.Colors, args: [buttonNames[ix]]).Answers(colorNames[buttonColors[ix]]);
-        yield return question(SBlindMaze.Maze).Answers(((numSolved + lastDigit) % 10).ToString());
     }
 }

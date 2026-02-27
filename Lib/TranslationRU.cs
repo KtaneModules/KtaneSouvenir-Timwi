@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using static Souvenir.Translation_ru.Conjugation;
 
@@ -1693,11 +1693,6 @@ public class Translation_ru : TranslationBase<TranslationInfo<Translation_ru.Que
                         ["Gray"] = "Серого",
                         ["Yellow"] = "Жёлтого",
                     },
-                },
-                [SBlindMaze.Maze] = new()
-                {
-                    // English: Which maze did you solve {0} on?
-                    Question = "Какой лабиринт вы прошли {0}?",
                 },
             },
         },

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Souvenir;
@@ -1604,11 +1604,6 @@ public class Translation_ja : TranslationBase<TranslationInfo<QuestionTranslatio
                         ["Gray"] = "灰",
                         ["Yellow"] = "黄",
                     },
-                },
-                [SBlindMaze.Maze] = new()
-                {
-                    // English: Which maze did you solve {0} on?
-                    Question = "{0}で解除に使用した迷路は？",
                 },
             },
         },

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Souvenir;
@@ -1651,11 +1651,6 @@ public class Translation_de : TranslationBase<Translation_de.TranslationInfo_de>
                         ["Gray"] = "Grau",
                         ["Yellow"] = "Gelb",
                     },
-                },
-                [SBlindMaze.Maze] = new()
-                {
-                    // English: Which maze did you solve {0} on?
-                    Question = "In welchem Labyrinth wurde {0} gelöst?",
                 },
             },
         },
